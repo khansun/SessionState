@@ -50,7 +50,13 @@ namespace Session_State.Controllers
             string session_id = Request.Headers["session-id"];
             return allCarts.RemoveCartItem(Guid.Parse(session_id), item);
         }
-        
 
+        [HttpDelete]
+        [Route("decrease/{item}")]
+        public String Decrease([FromRoute] string item)
+        {
+            string session_id = Request.Headers["session-id"];
+            return allCarts.DecreaseCartItem(Guid.Parse(session_id), item);
+        }
     }
 }

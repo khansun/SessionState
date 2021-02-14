@@ -84,5 +84,27 @@ namespace Session_State.Repositories
             return "Item Removed from Shopping Cart";
         }
 
+        public String DecreaseCartItem(Guid id, string item)
+        {
+            var carts = GetAllSessions();
+            var cart = carts.Find(cart => cart.Session_id == id);
+            bool missingItem = true;
+            foreach (var product in cart.Data.ToList())
+            {
+                if (product.Key == item)
+                {
+                    if (product.Value == 0)
+                        return "Shopping Cart has Zero amount of that item";
+                    cart.Data.Remove(product);
+                    cart.Data.Add(new KeyValuePair<string, int>(item, product.Value - 1));
+                    Console.WriteLine("Item count Decreased");
+                    missingItem = false;
+                }
+            }
+            if (missingItem)
+                return "There is no item of that type in the Shopping Cart";
+            SetSessionData(carts);
+            return "Item count Decreased";
+        }
     }
 }
