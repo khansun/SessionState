@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 using Session_State.Models;
 using Session_State.Repositories;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Session_State.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class CartController : ControllerBase
+    public class CartController : Controller
     {
         private readonly CartRepository allCarts;
 
@@ -20,12 +19,34 @@ namespace Session_State.Controllers
         {
             allCarts = new CartRepository();
         }
-        // GET: api/<CartController>
+        // GET: <CartController>
         [HttpGet]
         public List<ShoppingCart> Get()
         {
             return allCarts.GetAllSessions();
         }
+        [HttpPost]
+        [Route("add/{item}")]
+        public String Add([FromRoute] string item)
+        {
+            string session_id = Request.Headers["session-id"];
+            if (session_id == null)
+            {
+                Console.WriteLine("posting");
+                Guid id = allCarts.AddNewCart(item);
+                Response.Headers.Add("session-id", id.ToString());
+            }
+            else
+            {
+                allCarts.AddToCart(Guid.Parse(session_id), item);
+            }
+            return "Added to Cart";
+        }
+        public ActionResult Index()
+        {
+            return View(allCarts.GetAllSessions());
+        }
 
+      
     }
 }

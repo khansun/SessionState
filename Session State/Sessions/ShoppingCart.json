@@ -1,6 +1,6 @@
 [
   {
-    "Session_id": "1",
+    "Session_id": "f6195ca8-2112-440b-b162-871fbb499ce0",
     "Data": [
       {
         "Key": "perfume",
@@ -9,11 +9,15 @@
       {
         "Key": "shampoo",
         "Value": 1
+      },
+      {
+        "Key": "boxers",
+        "Value": 2
       }
     ]
   },
   {
-    "Session_id": "2",
+    "Session_id": "2572043f-abc8-4a83-a6a6-ee192ce8fa23",
     "Data": [
       {
         "Key": "perfume",
@@ -25,5 +29,4 @@
       }
     ]
   }
-
 ]
