@@ -32,7 +32,7 @@ namespace Session_State.Controllers
             string session_id = Request.Headers["session-id"];
             if (session_id == null)
             {
-                Console.WriteLine("posting");
+                Console.WriteLine("Session running");
                 Guid id = allCarts.AddNewCart(item);
                 Response.Headers.Add("session-id", id.ToString());
             }
@@ -40,7 +40,7 @@ namespace Session_State.Controllers
             {
                 allCarts.AddToCart(Guid.Parse(session_id), item);
             }
-            return "Added to Cart";
+            return "Item added to Shopping Cart";
         }
         public ActionResult Index()
         {
