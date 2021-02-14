@@ -1,7 +1,7 @@
 [
   {
-    "id": "1",
-    "data": [
+    "Session_id": "1",
+    "Data": [
       {
         "Key": "perfume",
         "Value": 3
@@ -13,8 +13,8 @@
     ]
   },
   {
-    "id": "2",
-    "data": [
+    "Session_id": "2",
+    "Data": [
       {
         "Key": "perfume",
         "Value": 4

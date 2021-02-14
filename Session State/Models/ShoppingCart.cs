@@ -7,8 +7,8 @@ namespace Session_State.Models
 {
     public class ShoppingCart
     {
-       public string id { get; set; }
-       public List<KeyValuePair<string, string>> data { get; set; }
+       public string Session_id { get; set; }
+       public List<KeyValuePair<string, string>> Data { get; set; }
         
     }
 }
