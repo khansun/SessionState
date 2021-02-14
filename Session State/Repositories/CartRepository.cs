@@ -46,18 +46,43 @@ namespace Session_State.Repositories
 
         public Guid AddNewCart(string item)
         {
-            ShoppingCart newCart = new ShoppingCart();
-            newCart.Session_id = Guid.NewGuid();
-            var newItem = new List<KeyValuePair<string, int>>();
-            newItem.Add(new KeyValuePair<string, int>(item, 1));
+            ShoppingCart newCart = new ShoppingCart
+            {
+                Session_id = Guid.NewGuid()
+            };
+            var newItem = new List<KeyValuePair<string, int>>
+            {
+                new KeyValuePair<string, int>(item, 1)
+            };
             newCart.Data = newItem;
-            var carts = new List<ShoppingCart>();
-            carts = GetAllSessions();
+            var carts = GetAllSessions();
             carts.Add(newCart);
-            Console.WriteLine("New Cart Added");
+            Console.WriteLine("New Cart data added to session");
             SetSessionData(carts);
 
             return newCart.Session_id;
         }
+
+     
+        public String RemoveCartItem(Guid id, string item)
+        {
+            var carts = GetAllSessions();
+            var cart = carts.Find(cart => cart.Session_id == id);
+            bool lostItem = true;
+            foreach (var product in cart.Data.ToList())
+            {
+                if (product.Key == item)
+                {
+                    cart.Data.Remove(product);
+                    Console.WriteLine("Item Removed from Shopping Cart");
+                    lostItem = false;
+                }
+            }
+            if (lostItem)
+                return "There is no item of that type in the Shopping Cart";
+            SetSessionData(carts);
+            return "Item Removed from Shopping Cart";
+        }
+
     }
 }

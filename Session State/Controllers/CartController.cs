@@ -42,11 +42,15 @@ namespace Session_State.Controllers
             }
             return "Item added to Shopping Cart";
         }
-        public ActionResult Index()
-        {
-            return View(allCarts.GetAllSessions());
-        }
 
-      
+        [HttpDelete]
+        [Route("remove/{item}")]
+        public String Remove([FromRoute] string item)
+        {
+            string session_id = Request.Headers["session-id"];
+            return allCarts.RemoveCartItem(Guid.Parse(session_id), item);
+        }
+        
+
     }
 }
